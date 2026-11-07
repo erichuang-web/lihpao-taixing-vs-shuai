@@ -160,7 +160,7 @@
     </section>
     <section class="card">
       <h2>累積時間差</h2>
-      <p class="cnote">往上＝Eric 落後越多；線越陡＝那段掉越多時間。</p>
+      <p class="cnote">這條線是整趟兩人差幾秒在變化：往上＝Eric 比較慢（落後）、往下＝Eric 比較快（領先）；哪裡最陡＝那一小段差距拉最快；最後停在哪＝整圈共差幾秒。</p>
       <div class="chart" id="gap"></div>
     </section>
   </div>
@@ -228,7 +228,8 @@ function renderAnalysis(){
   document.getElementById('an-loser').textContent=LOSER;
   document.getElementById('an-loser2').textContent=LOSER;
   document.getElementById('an-winner').textContent=WINNER;
-  const worst=[...cornerStats].sort((a,b)=>loserGap(b)-loserGap(a)).filter(c=>loserGap(c)>0.02).slice(0,5);
+  const cn=c=>parseInt(String(c.corner).slice(1),10)||0;
+  const worst=[...cornerStats].sort((a,b)=>loserGap(b)-loserGap(a)).filter(c=>loserGap(c)>0.02).slice(0,5).sort((a,b)=>cn(a)-cn(b));
   const ol=document.getElementById('an-worst'); ol.innerHTML='';
   for(const c of worst){
     const dmin=wiMin(c)-loMin(c); let reason;
@@ -238,8 +239,8 @@ function renderAnalysis(){
     const li=document.createElement('li'); li.innerHTML=`<b>${c.corner}（${c.dir}彎・${Math.round(c.apex)} m）掉 ${f3(loserGap(c))} 秒</b>：${reason}`; ol.appendChild(li);
   }
   // loser 改進
-  const entry=cornerStats.filter(c=>loserGap(c)>0.02 && wiMin(c)-loMin(c)>3);
-  const exitl=cornerStats.filter(c=>loserGap(c)>0.02 && wiMin(c)-loMin(c)<=1);
+  const entry=cornerStats.filter(c=>loserGap(c)>0.02 && wiMin(c)-loMin(c)>3).sort((a,b)=>cn(a)-cn(b));
+  const exitl=cornerStats.filter(c=>loserGap(c)>0.02 && wiMin(c)-loMin(c)<=1).sort((a,b)=>cn(a)-cn(b));
   const ul=document.getElementById('an-imp-loser'); ul.innerHTML='';
   const add=(el,html)=>{const li=document.createElement('li');li.innerHTML=html;el.appendChild(li);};
   if(worst.length) add(ul,`優先練這幾個掉最多的彎：<b>${worst.map(c=>c.corner).join('、')}</b>（上面列的）。`);
@@ -248,8 +249,8 @@ function renderAnalysis(){
   const totGap=Math.abs(gapTotal).toFixed(3);
   add(ul,`整圈共慢 <b>${totGap}</b> 秒，光上面前 ${worst.length} 個彎就佔 <b>${worst.reduce((s,c)=>s+loserGap(c),0).toFixed(3)}</b> 秒 → 先把這幾個練起來最有感。`);
   // winner 改進
-  const winnerLost=cornerStats.filter(c=>loserGap(c)<-0.02).sort((a,b)=>loserGap(a)-loserGap(b)).slice(0,4);
-  const slowCorners=[...cornerStats].sort((a,b)=>wiMin(a)-wiMin(b)).slice(0,3);
+  const winnerLost=cornerStats.filter(c=>loserGap(c)<-0.02).sort((a,b)=>loserGap(a)-loserGap(b)).slice(0,4).sort((a,b)=>cn(a)-cn(b));
+  const slowCorners=[...cornerStats].sort((a,b)=>wiMin(a)-wiMin(b)).slice(0,3).sort((a,b)=>cn(a)-cn(b));
   const uw=document.getElementById('an-imp-winner'); uw.innerHTML='';
   if(winnerLost.length) add(uw,`其實也有輸的彎：<b>${winnerLost.map(c=>c.corner).join('、')}</b> ${WINNER} 反而比較慢 → 這幾個還能再撈回時間。`);
   else add(uw,`這圈幾乎每個彎都領先，很穩。`);
