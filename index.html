@@ -313,9 +313,6 @@ function drawMap(){
   el.style.minHeight=H+'px'; el.innerHTML='';
   const rootSvg = d3.select(el).append('svg').attr('width','100%').attr('viewBox','0 0 '+W+' '+H).style('display','block').style('touch-action','none');
   const svg = rootSvg.append('g');
-  const zoom = d3.zoom().scaleExtent([1,8]).translateExtent([[0,0],[W,H]]).extent([[0,0],[W,H]]).on('zoom',ev=>svg.attr('transform',ev.transform));
-  rootSvg.call(zoom).on('dblclick.zoom',null).on('dblclick',()=>rootSvg.transition().duration(300).call(zoom.transform,d3.zoomIdentity));
-  mapZoom = { root:rootSvg, zoom:zoom, W:W, H:H };
   const line = off => d3.line().x(p=>p.X+p.nx*off).y(p=>p.Y+p.ny*off);
   svg.append('path').attr('d',line(0)(P)).attr('fill','none').attr('stroke','#2a2e37').attr('stroke-width',20).attr('stroke-linecap','round').attr('stroke-linejoin','round');
   svg.append('path').attr('d',line(0)(P)).attr('fill','none').attr('stroke','#15171c').attr('stroke-width',15).attr('stroke-linecap','round').attr('stroke-linejoin','round');
@@ -354,10 +351,12 @@ function drawMap(){
   // start/finish flag
   const sp=P[0]; const sf=svg.append('g').attr('transform','translate('+sp.X+','+sp.Y+') rotate('+(Math.atan2(sp.ny,sp.nx)*180/Math.PI)+')');
   for(let r=0;r<2;r++)for(let q=-3;q<3;q++)sf.append('rect').attr('x',-4+r*4).attr('y',q*4).attr('width',4).attr('height',4).attr('fill',(r+q)%2===0?'#fff':'#111');
-  // 23 彎標註 T1–T23
+  // 23 彎標註 T1–T23（編號圈自動往外推到離開賽道才停，不壓線）
+  const clearOf=(bx,by)=>{ let m=1e18; for(const q of P){ const dx=q.X-bx,dy=q.Y-by,d=dx*dx+dy*dy; if(d<m)m=d; } return Math.sqrt(m); };
+  const placeLbl=(p,side)=>{ let best=null; for(const off of [30,42,54,68,84,102]){ for(const s of [side,-side]){ const bx=p.X+p.nx*off*s,by=p.Y+p.ny*off*s,c=clearOf(bx,by); if(!best||c>best.c)best={bx,by,c}; if(c>=27)return {bx,by}; } } return best; };
   if(DATA.corners) for(const c of DATA.corners){
     const p=P[at(c.apex_m)]; const outSide=c.dir==='右'?1:-1;
-    const bx=p.X+p.nx*34*outSide, by=p.Y+p.ny*34*outSide;
+    const lb=placeLbl(p,outSide); const bx=lb.bx, by=lb.by;
     svg.append('line').attr('x1',p.X).attr('y1',p.Y).attr('x2',bx).attr('y2',by).attr('stroke','#596070').attr('stroke-width',1);
     const g=svg.append('g').attr('transform','translate('+bx+','+by+')');
     g.append('circle').attr('r',10).attr('fill','#0b0c0f').attr('stroke','#9aa1ad').attr('stroke-width',1.5);
@@ -369,6 +368,14 @@ function drawMap(){
   const link = svg.append('line').attr('stroke','#8a93a3').attr('stroke-width',1).attr('stroke-dasharray','3 3').attr('pointer-events','none').node();
   const mkCar=(col,lab)=>{ const g=svg.append('g').attr('class','car'); g.append('circle').attr('r',15).attr('fill',col).attr('opacity',.18); g.append('circle').attr('r',8.5).attr('fill',col).attr('stroke','#fff').attr('stroke-width',2); g.append('text').attr('text-anchor','middle').attr('dominant-baseline','central').attr('fill','#fff').attr('stroke',col).attr('stroke-width',.5).style('font-size','9px').style('font-weight','900').style('font-style','italic').text(lab); return g.node(); };
   rxMap = { pointAt, link, cars:{ e:mkCar(COL.e,'E'), t:mkCar(COL.t,'泰') } };
+  // 把畫布撐到剛好包含賽道＋所有往外推的彎道標籤，標籤才不會被切到邊
+  const vb=svg.node().getBBox(); const M=8;
+  const VB=[vb.x-M, vb.y-M, vb.width+2*M, vb.height+2*M];
+  rootSvg.attr('viewBox',VB.join(' '));
+  el.style.minHeight=Math.round(W*VB[3]/VB[2])+'px';
+  const zoom=d3.zoom().scaleExtent([1,8]).translateExtent([[VB[0],VB[1]],[VB[0]+VB[2],VB[1]+VB[3]]]).extent([[VB[0],VB[1]],[VB[0]+VB[2],VB[1]+VB[3]]]).on('zoom',ev=>svg.attr('transform',ev.transform));
+  rootSvg.call(zoom).on('dblclick.zoom',null).on('dblclick',()=>rootSvg.transition().duration(300).call(zoom.transform,d3.zoomIdentity));
+  mapZoom = { root:rootSvg, zoom:zoom };
   renderPlay();
 }
 
