@@ -368,9 +368,12 @@ function drawMap(){
   const link = svg.append('line').attr('stroke','#8a93a3').attr('stroke-width',1).attr('stroke-dasharray','3 3').attr('pointer-events','none').node();
   const mkCar=(col,lab)=>{ const g=svg.append('g').attr('class','car'); g.append('circle').attr('r',15).attr('fill',col).attr('opacity',.18); g.append('circle').attr('r',8.5).attr('fill',col).attr('stroke','#fff').attr('stroke-width',2); g.append('text').attr('text-anchor','middle').attr('dominant-baseline','central').attr('fill','#fff').attr('stroke',col).attr('stroke-width',.5).style('font-size','9px').style('font-weight','900').style('font-style','italic').text(lab); return g.node(); };
   rxMap = { pointAt, link, cars:{ e:mkCar(COL.e,'E'), t:mkCar(COL.t,'泰') } };
-  // 把畫布撐到剛好包含賽道＋所有往外推的彎道標籤，標籤才不會被切到邊
+  // 把畫布撐到包含賽道＋所有往外推的標籤，且讓「賽道」置中（以賽道中心對稱撐開，美觀）
   const vb=svg.node().getBBox(); const M=8;
-  const VB=[vb.x-M, vb.y-M, vb.width+2*M, vb.height+2*M];
+  let tx0=1e18,tx1=-1e18,ty0=1e18,ty1=-1e18; for(const q of P){ if(q.X<tx0)tx0=q.X; if(q.X>tx1)tx1=q.X; if(q.Y<ty0)ty0=q.Y; if(q.Y>ty1)ty1=q.Y; }
+  const cx=(tx0+tx1)/2, cy=(ty0+ty1)/2;
+  const hw=Math.max(cx-vb.x, vb.x+vb.width-cx), hh=Math.max(cy-vb.y, vb.y+vb.height-cy);
+  const VB=[cx-hw-M, cy-hh-M, 2*(hw+M), 2*(hh+M)];
   rootSvg.attr('viewBox',VB.join(' '));
   el.style.minHeight=Math.round(W*VB[3]/VB[2])+'px';
   const zoom=d3.zoom().scaleExtent([1,8]).translateExtent([[VB[0],VB[1]],[VB[0]+VB[2],VB[1]+VB[3]]]).extent([[VB[0],VB[1]],[VB[0]+VB[2],VB[1]+VB[3]]]).on('zoom',ev=>svg.attr('transform',ev.transform));
