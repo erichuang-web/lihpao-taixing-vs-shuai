@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>麗寶賽道支配圖｜Eric vs 泰興</title>
+<title>麗寶賽道支配圖｜泰興 vs 甩神</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
   :root { --bg:#0b0c0f; --panel:#14161b; --line:#2a2e37; --fg:#f4f5f7; --mut:#9aa1ad; --red:#e10600; --e:#ff3b30; --t:#1ed3ff; --tie:#6b7280; }
@@ -89,23 +89,23 @@
   <header class="hero">
     <div class="speedlines"></div>
     <span class="tag">LIHPAO FULL・TRACK DOMINANCE</span>
-    <h1>Eric<span class="vs">VS</span>泰興</h1>
-    <p class="sub">麗寶國際賽車場 Full（約 3.4 km）・2026/10/31・兩人各自最快圈：Eric L4、泰興 L2。沿 Eric 的行車線以距離對齊。</p>
+    <h1>泰興<span class="vs">VS</span>甩神</h1>
+    <p class="sub">麗寶國際賽車場 Full（約 3.4 km）・2026/10/31・兩人各自最快圈：泰興 L4、甩神 L2。沿 泰興 的行車線以距離對齊。</p>
     <p class="take" id="take">—</p>
   </header>
 
   <section class="tiles">
-    <div class="tile e"><div class="lab">Eric 最快圈</div><div class="num" id="lapE">—</div></div>
-    <div class="tile t"><div class="lab">泰興 最快圈</div><div class="num" id="lapT">—</div></div>
-    <div class="tile e"><div class="lab">Eric 極速</div><div class="num"><span id="vmaxE">—</span><span class="unit">km/h</span></div></div>
-    <div class="tile t"><div class="lab">泰興 極速</div><div class="num"><span id="vmaxT">—</span><span class="unit">km/h</span></div></div>
-    <div class="tile e"><div class="lab">Eric 贏的區段</div><div class="num"><span id="segE">—</span><span class="unit">/ 40</span></div></div>
-    <div class="tile t"><div class="lab">泰興 贏的區段</div><div class="num"><span id="segT">—</span><span class="unit">/ 40</span></div></div>
+    <div class="tile e"><div class="lab">泰興 最快圈</div><div class="num" id="lapE">—</div></div>
+    <div class="tile t"><div class="lab">甩神 最快圈</div><div class="num" id="lapT">—</div></div>
+    <div class="tile e"><div class="lab">泰興 極速</div><div class="num"><span id="vmaxE">—</span><span class="unit">km/h</span></div></div>
+    <div class="tile t"><div class="lab">甩神 極速</div><div class="num"><span id="vmaxT">—</span><span class="unit">km/h</span></div></div>
+    <div class="tile e"><div class="lab">泰興 贏的區段</div><div class="num"><span id="segE">—</span><span class="unit">/ 40</span></div></div>
+    <div class="tile t"><div class="lab">甩神 贏的區段</div><div class="num"><span id="segT">—</span><span class="unit">/ 40</span></div></div>
   </section>
 
   <section class="card play">
     <h2>幽靈對決・播放</h2>
-    <p class="cnote">按 ▶ 播放，兩台車從起點同時出發、一起跑這一圈——泰興（藍）會慢慢把 Eric（紅）拉開。車子在下面的賽道地圖上跑；也可以直接拖時間軸看任一瞬間。</p>
+    <p class="cnote">按 ▶ 播放，兩台車從起點同時出發、一起跑這一圈——甩神（藍）會慢慢把 泰興（紅）拉開。車子在下面的賽道地圖上跑；也可以直接拖時間軸看任一瞬間。</p>
     <div class="ctl">
       <button type="button" class="pp" id="pp" aria-label="播放" aria-pressed="false">▶</button>
       <span class="clock" id="clock">0.0s</span>
@@ -117,15 +117,15 @@
       </span>
     </div>
     <div class="read">
-      <div class="rb e"><div class="lab">Eric</div><div class="big"><span id="rEv">—</span> <span class="sm">km/h</span></div><div class="sm" id="rEd">起點</div></div>
-      <div class="rb t"><div class="lab">泰興</div><div class="big"><span id="rTv">—</span> <span class="sm">km/h</span></div><div class="sm" id="rTd">起點</div></div>
+      <div class="rb e"><div class="lab">泰興</div><div class="big"><span id="rEv">—</span> <span class="sm">km/h</span></div><div class="sm" id="rEd">起點</div></div>
+      <div class="rb t"><div class="lab">甩神</div><div class="big"><span id="rTv">—</span> <span class="sm">km/h</span></div><div class="sm" id="rTd">起點</div></div>
       <div class="rb"><div class="lab">領先差距</div><div class="big" id="rGap">並駕</div><div class="sm" id="rGapm">0 m</div></div>
     </div>
   </section>
 
   <section class="card">
     <h2>賽道支配圖</h2>
-    <p class="cnote">沿賽道每段誰比較快：紅＝Eric 快、藍＝泰興 快。切換模式看時速、煞車、開油。地圖上灰色編號圈＝23 個彎 T1–T23（滑過去看那個彎兩人時速）；滑賽道看每段數字。</p>
+    <p class="cnote">沿賽道每段誰比較快：紅＝泰興 快、藍＝甩神 快。切換模式看時速、煞車、開油。地圖上灰色編號圈＝23 個彎 T1–T23（滑過去看那個彎兩人時速）；滑賽道看每段數字。</p>
     <div class="modes" role="group">
       <button type="button" data-mode="dom" aria-pressed="true">支配</button>
       <button type="button" data-mode="spd" aria-pressed="false">時速</button>
@@ -133,13 +133,13 @@
       <button type="button" data-mode="thr" aria-pressed="false">開油</button>
     </div>
     <div class="legend">
-      <span data-leg="dom"><span class="sw e"></span>Eric 較快</span>
-      <span data-leg="dom"><span class="sw t"></span>泰興 較快</span>
+      <span data-leg="dom"><span class="sw e"></span>泰興 較快</span>
+      <span data-leg="dom"><span class="sw t"></span>甩神 較快</span>
       <span data-leg="dom">40 個區段</span>
       <span data-leg="spd" hidden>線越粗＝時速差越大</span>
       <span data-leg="brk" hidden id="brkleg"></span>
-      <span data-leg="thr" hidden><span class="sw e"></span>Eric 全油門</span>
-      <span data-leg="thr" hidden><span class="sw t"></span>泰興 全油門</span>
+      <span data-leg="thr" hidden><span class="sw e"></span>泰興 全油門</span>
+      <span data-leg="thr" hidden><span class="sw t"></span>甩神 全油門</span>
     </div>
     <div class="mapwrap">
       <div class="map" id="map"></div>
@@ -166,13 +166,13 @@
   <div class="grid2">
     <section class="card">
       <h2>速度比較</h2>
-      <p class="cnote">沿 Eric 的行車線、以距離對齊。播放時紅線會跟著跑。</p>
-      <div class="legend"><span><span class="sw e"></span>Eric</span><span><span class="sw t"></span>泰興</span></div>
+      <p class="cnote">沿 泰興 的行車線、以距離對齊。播放時紅線會跟著跑。</p>
+      <div class="legend"><span><span class="sw e"></span>泰興</span><span><span class="sw t"></span>甩神</span></div>
       <div class="chart" id="speed"></div>
     </section>
     <section class="card">
       <h2>累積時間差</h2>
-      <p class="cnote">這條線是整趟兩人差幾秒在變化：往上＝Eric 比較慢（落後）、往下＝Eric 比較快（領先）；哪裡最陡＝那一小段差距拉最快；最後停在哪＝整圈共差幾秒。</p>
+      <p class="cnote">這條線是整趟兩人差幾秒在變化：往上＝泰興 比較慢（落後）、往下＝泰興 比較快（領先）；哪裡最陡＝那一小段差距拉最快；最後停在哪＝整圈共差幾秒。</p>
       <div class="chart" id="gap"></div>
     </section>
   </div>
@@ -180,10 +180,10 @@
   <details>
     <summary>資料與限制</summary>
     <dl>
-      <dt>來源</dt><dd>Eric：RaceChrono session（GPS 25 Hz＋OBD＋煞車壓力）。泰興：RaceChrono 匯出 CSV（GPS＋OBD，沒有煞車）。</dd>
-      <dt>對齊</dt><dd>泰興每個 GPS 點投影到 Eric 的行車線上，再每 2 m 取兩人經過的時間，呈現「沿 Eric 路線」的優劣（跟 F1 支配圖做法一樣）。</dd>
-      <dt>油門</dt><dd>兩車油門感測器刻度不同（泰興全油門約顯示 92%），各自以自己的最大值為全油門。</dd>
-      <dt>煞車</dt><dd>只有 Eric 有煞車壓力資料。</dd>
+      <dt>來源</dt><dd>泰興：RaceChrono session（GPS 25 Hz＋OBD＋煞車壓力）。甩神：RaceChrono 匯出 CSV（GPS＋OBD，沒有煞車）。</dd>
+      <dt>對齊</dt><dd>甩神每個 GPS 點投影到 泰興 的行車線上，再每 2 m 取兩人經過的時間，呈現「沿 泰興 路線」的優劣（跟 F1 支配圖做法一樣）。</dd>
+      <dt>油門</dt><dd>兩車油門感測器刻度不同（甩神全油門約顯示 92%），各自以自己的最大值為全油門。</dd>
+      <dt>煞車</dt><dd>只有 泰興 有煞車壓力資料。</dd>
     </dl>
   </details>
   <p class="foot">單一網頁檔，資料已內建，離線也能開。d3.js 由 cdnjs 載入。</p>
@@ -205,19 +205,19 @@ const mini = [];
 for (let i=0;i<NSEG;i++){
   const a = TR[Math.floor(i*(TR.length-1)/NSEG)], b = TR[Math.floor((i+1)*(TR.length-1)/NSEG)];
   const es = b.eric_t-a.eric_t, ts = b.tx_t-a.tx_t;
-  mini.push({ from:a.d, to:b.d, es, ts, winner: es<ts?'Eric':'泰興', gap:es-ts });
+  mini.push({ from:a.d, to:b.d, es, ts, winner: es<ts?'泰興':'甩神', gap:es-ts });
 }
 const vmaxE = d3.max(TR,p=>p.eric_kmh), vmaxT = d3.max(TR,p=>p.tx_kmh);
-const segE = mini.filter(m=>m.winner==='Eric').length, segT = NSEG-segE;
+const segE = mini.filter(m=>m.winner==='泰興').length, segT = NSEG-segE;
 const gapTotal = DATA.laps.eric_s - DATA.laps.tx_s;
-const NAME1 = (DATA.meta&&DATA.meta.d1)||'Eric', NAME2=(DATA.meta&&DATA.meta.d2)||'泰興';
+const NAME1 = (DATA.meta&&DATA.meta.d1)||'泰興', NAME2=(DATA.meta&&DATA.meta.d2)||'甩神';
 (function swapNames(){
-  if((NAME1==='Eric'&&NAME2==='泰興'))return;
-  const swap=s=>s.replace(/Eric|泰興/g,m=>m==='Eric'?NAME1:NAME2);
+  if((NAME1==='泰興'&&NAME2==='甩神'))return;
+  const swap=s=>s.replace(/泰興|甩神/g,m=>m==='泰興'?NAME1:NAME2);
   document.title=swap(document.title);
   const root=document.querySelector('.wrap'), ana=document.getElementById('analysis');
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); const ns=[];
-  while(w.nextNode()){ const n=w.currentNode; if(ana&&ana.contains(n))continue; if(/Eric|泰興/.test(n.nodeValue))ns.push(n); }
+  while(w.nextNode()){ const n=w.currentNode; if(ana&&ana.contains(n))continue; if(/泰興|甩神/.test(n.nodeValue))ns.push(n); }
   ns.forEach(n=>n.nodeValue=swap(n.nodeValue));
 })();
 
@@ -231,10 +231,10 @@ function cornerStat(c,i){
   return {corner:c.corner,dir:c.dir,apex:c.apex_m,es,ts,gap:es-ts,emin,tmin};
 }
 const cornerStats=(DATA.corners||[]).map((c,i)=>cornerStat(c,i));
-const loserIsEric=gapTotal>0;  // gapTotal=eric-tx；>0=Eric 較慢
-const LOSER=loserIsEric?NAME1:NAME2, WINNER=loserIsEric?NAME2:NAME1;
-const loserGap=c=>loserIsEric?c.gap:-c.gap;         // loser 比 winner 多花幾秒
-const loMin=c=>loserIsEric?c.emin:c.tmin, wiMin=c=>loserIsEric?c.tmin:c.emin;
+const loserIs泰興=gapTotal>0;  // gapTotal=eric-tx；>0=泰興 較慢
+const LOSER=loserIs泰興?NAME1:NAME2, WINNER=loserIs泰興?NAME2:NAME1;
+const loserGap=c=>loserIs泰興?c.gap:-c.gap;         // loser 比 winner 多花幾秒
+const loMin=c=>loserIs泰興?c.emin:c.tmin, wiMin=c=>loserIs泰興?c.tmin:c.emin;
 function renderAnalysis(){
   if(!cornerStats.length) return;
   document.getElementById('an-loser').textContent=LOSER;
@@ -277,7 +277,7 @@ function renderAnalysis(){
   }
   else add(uw,`這圈幾乎每個彎都領先，很穩。`);
   add(uw,`想再快，從最低速最低的幾個彎下手：<b>${slowCorners.map(c=>`${c.corner}(${Math.round(wiMin(c))})`).join('、')}</b> km/h → 這些慢彎每多帶 1-2 km/h，整圈最有效。`);
-  add(uw,`極速已達 <b>${Math.round(loserIsEric?vmaxT:vmaxE)}</b> km/h；直線尾速穩定後，重點放在<b>彎中速度與出彎銜接</b>。`);
+  add(uw,`極速已達 <b>${Math.round(loserIs泰興?vmaxT:vmaxE)}</b> km/h；直線尾速穩定後，重點放在<b>彎中速度與出彎銜接</b>。`);
 }
 
 // ---- header fills ----
@@ -320,8 +320,8 @@ function drawMap(){
   const segPath=(a,b,off)=>line(off||0)(P.slice(a,b+1));
   const runs=(test)=>{const out=[];let s=-1;P.forEach((p,i)=>{if(test(p)){if(s<0)s=i;}else if(s>=0){out.push([s,i-1]);s=-1;}});if(s>=0)out.push([s,P.length-1]);return out;};
   if(mode==='dom'){
-    for(const m of mini){ svg.append('path').attr('d',segPath(at(m.from),at(m.to))).attr('fill','none').attr('stroke',m.winner==='Eric'?COL.e:COL.t).attr('stroke-width',8).attr('stroke-linecap','butt')
-      .on('pointermove pointerdown',(ev)=>{const[mx,my]=d3.pointer(ev,el); tipLines(tip,Math.round(m.from)+'–'+Math.round(m.to)+' m',[[COL.e,NAME1+' '+f3(m.es)+' s'],[COL.t,NAME2+' '+f3(m.ts)+' s'],[null,(m.winner==='Eric'?NAME1:NAME2)+' 快 '+f3(Math.abs(m.gap))+' s']]); placeTip(el,tip,mx,my);})
+    for(const m of mini){ svg.append('path').attr('d',segPath(at(m.from),at(m.to))).attr('fill','none').attr('stroke',m.winner==='泰興'?COL.e:COL.t).attr('stroke-width',8).attr('stroke-linecap','butt')
+      .on('pointermove pointerdown',(ev)=>{const[mx,my]=d3.pointer(ev,el); tipLines(tip,Math.round(m.from)+'–'+Math.round(m.to)+' m',[[COL.e,NAME1+' '+f3(m.es)+' s'],[COL.t,NAME2+' '+f3(m.ts)+' s'],[null,(m.winner==='泰興'?NAME1:NAME2)+' 快 '+f3(Math.abs(m.gap))+' s']]); placeTip(el,tip,mx,my);})
       .on('pointerleave',()=>tip.hidden=true); }
   } else if(mode==='spd'){
     const step=5;
@@ -367,7 +367,7 @@ function drawMap(){
   const pointAt = d => { const i=at(d); const a=P[i],b=P[Math.min(P.length-1,i+1)]; const f=(d-a.d)/((b.d-a.d)||1); return {X:a.X+(b.X-a.X)*f, Y:a.Y+(b.Y-a.Y)*f}; };
   const link = svg.append('line').attr('stroke','#8a93a3').attr('stroke-width',1).attr('stroke-dasharray','3 3').attr('pointer-events','none').node();
   const mkCar=(col,lab)=>{ const g=svg.append('g').attr('class','car'); g.append('circle').attr('r',15).attr('fill',col).attr('opacity',.18); g.append('circle').attr('r',8.5).attr('fill',col).attr('stroke','#fff').attr('stroke-width',2); g.append('text').attr('text-anchor','middle').attr('dominant-baseline','central').attr('fill','#fff').attr('stroke',col).attr('stroke-width',.5).style('font-size','9px').style('font-weight','900').style('font-style','italic').text(lab); return g.node(); };
-  rxMap = { pointAt, link, cars:{ e:mkCar(COL.e,'E'), t:mkCar(COL.t,'泰') } };
+  rxMap = { pointAt, link, cars:{ e:mkCar(COL.e,NAME1.slice(0,1)), t:mkCar(COL.t,NAME2.slice(0,1)) } };
   // 把畫布撐到包含賽道＋所有往外推的標籤，且讓「賽道」置中（以賽道中心對稱撐開，美觀）
   const vb=svg.node().getBBox(); const M=8;
   let tx0=1e18,tx1=-1e18,ty0=1e18,ty1=-1e18; for(const q of P){ if(q.X<tx0)tx0=q.X; if(q.X>tx1)tx1=q.X; if(q.Y<ty0)ty0=q.Y; if(q.Y>ty1)ty1=q.Y; }
